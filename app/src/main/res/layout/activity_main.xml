@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <TextView
+        android:id="@+id/hi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2196F3"
+        android:gravity="center"
+        android:shadowColor="#3F51B5"
+        android:text="@string/hello"
+        android:textColor="#F2F2F2"
+        android:textSize="30dp" />
+
+    <EditText
+        android:id="@+id/inp"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:hint="请输入摄氏度" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:onClick="btn"
+        android:text="@string/alter" />
+
+    <TextView
+        android:id="@+id/re"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:hint="结果区"
+        android:textSize="30dp" />
+</LinearLayout>
