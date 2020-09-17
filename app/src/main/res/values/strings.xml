@@ -2,4 +2,11 @@
     <string name="app_name">My Application</string>
     <string name="hello">Hello</string>
     <string name="alter">转换为华氏度</string>
+    <string name="out">Team A 得分</string>
+    <string name="img">记分板</string>
+    <string name="btn">得分1</string>
+    <string name="btn1">得分2</string>
+    <string name="btn2">得分3</string>
+    <string name="btn3">清零</string>
+
 </resources>
