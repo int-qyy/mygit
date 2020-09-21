@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     TextView out1;
     TextView out2;
+    TextView out;
     EditText edit;
 /**
     @Override
@@ -28,8 +29,10 @@ public class MainActivity extends AppCompatActivity {
     **/
     int i=0;
     int j=0;
-
+    /**
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculation);
@@ -66,5 +69,36 @@ public class MainActivity extends AppCompatActivity {
         j=0;
         out1.setText(""+i);
         out2.setText(""+j);
+    }
+     **/
+
+
+
+    @Override
+
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_exchange);
+        out=(TextView)findViewById(R.id.textView);
+        edit=(EditText)findViewById(R.id.inp);
+    }
+    public void btn1(View view){
+        String str=edit.getText().toString();
+        float t=Float.parseFloat(str);
+        double c=t*6.8;
+        out.setText("美元"+c);
+    }
+    public void btn2(View view){
+        String str=edit.getText().toString();
+        float t=Float.parseFloat(str);
+        double c=t*8.04;
+        out.setText("欧元"+c);
+    }
+    public void btn3(View view){
+        String str=edit.getText().toString();
+        float t=Float.parseFloat(str);
+        double c=t*4.4;
+        out.setText("澳元"+c);
     }
 }

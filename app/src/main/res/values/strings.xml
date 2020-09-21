@@ -12,5 +12,7 @@
     <string name="btn2">free throw</string>
     <string name="btn3">reset</string>
     <string name="hi">hello</string>
-
+    <string name="DOLLAR">DOLLAR</string>
+    <string name="EURO">EURO</string>
+    <string name="WON">WON</string>
 </resources>
