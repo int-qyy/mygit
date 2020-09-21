@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="hello">Hello</string>
+    <string name="hello">CourtCounter</string>
     <string name="alter">转换为华氏度</string>
-    <string name="out">Team A 得分</string>
+    <string name="A">Team A </string>
+    <string name="B">Team B </string>
+    <string name="out1">0</string>
+    <string name="out2">0</string>
     <string name="img">记分板</string>
-    <string name="btn">得分1</string>
-    <string name="btn1">得分2</string>
-    <string name="btn2">得分3</string>
-    <string name="btn3">清零</string>
+    <string name="btn">+3 points </string>
+    <string name="btn1">+2 points</string>
+    <string name="btn2">free throw</string>
+    <string name="btn3">reset</string>
+    <string name="hi">hello</string>
 
 </resources>
