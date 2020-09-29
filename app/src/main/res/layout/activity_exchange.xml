@@ -27,27 +27,42 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/hi"
-            android:textSize="30dp" />
+            android:textSize="50dp" />
 
         <Button
             android:id="@+id/dollar"
+            android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="btn1"
+            android:onClick="btn"
+            android:background="@color/colorButton"
             android:text="@string/DOLLAR" />
 
         <Button
             android:id="@+id/euro"
+            android:layout_margin="10dp"
+            android:background="@color/colorButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="btn2"
+            android:onClick="btn"
             android:text="@string/EURO" />
 
         <Button
+            android:background="@color/colorButton"
+            android:layout_margin="10dp"
             android:id="@+id/won"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="btn3"
+            android:onClick="btn"
             android:text="@string/WON" />
+
+        <Button
+            android:id="@+id/open"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="onConfig"
+            android:background="@color/colorButton"
+            android:text="@string/config" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

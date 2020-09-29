@@ -15,4 +15,6 @@
     <string name="DOLLAR">DOLLAR</string>
     <string name="EURO">EURO</string>
     <string name="WON">WON</string>
+    <string name="SAVE">SAVE</string>
+    <string name="config">CONFIG</string>
 </resources>
