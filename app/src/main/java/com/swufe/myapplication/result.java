@@ -134,7 +134,7 @@ public class result extends AppCompatActivity implements Runnable {
         final int bufferSize=1024;
         final char[] buffer=new char[bufferSize];
         final StringBuilder out=new StringBuilder();
-        Reader in=new InputStreamReader(inputStream,"gb2312" );
+        Reader in=new InputStreamReader(inputStream,"GB2312" );
         while(true){
             int rsz=in.read(buffer,0,buffer.length);
             if(rsz<0)
