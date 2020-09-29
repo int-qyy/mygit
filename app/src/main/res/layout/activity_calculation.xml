@@ -52,7 +52,7 @@
                     android:gravity="center"
                     android:text="@string/out1"
                     android:textColor="#E3C3B4"
-                    android:textSize="40dp" />
+                    android:textSize="100dp" />
 
                 <Button
 
@@ -130,7 +130,7 @@
                     android:gravity="center"
                     android:text="@string/out2"
                     android:textColor="#E3C3B4"
-                    android:textSize="40dp" />
+                    android:textSize="100dp" />
 
 
                 <Button

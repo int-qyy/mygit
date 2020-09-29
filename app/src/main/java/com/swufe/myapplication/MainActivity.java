@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     **/
     int i=0;
     int j=0;
-    /**
+
     @Override
 
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         out1.setText(""+i);
         out2.setText(""+j);
     }
-     **/
+
 
     float DollarRate=(float)0.147;
     float EuroRate=(float)0.122;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
 
 
-
+/**
     @Override
 
 
@@ -190,4 +190,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    **/
 }

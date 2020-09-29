@@ -1,15 +1,18 @@
 package com.swufe.myapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 public class calculation extends AppCompatActivity {
     TextView out1;
     TextView out2;
-
+    private static final String TAG = "calculation";
     int i=0;
     int j=0;
 
@@ -51,4 +54,28 @@ public class calculation extends AppCompatActivity {
         out1.setText(""+i);
         out2.setText(""+j);
     }
+
+@Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        String scorea=((TextView)findViewById(R.id.A)).getText().toString();
+        String scoreb=((TextView)findViewById(R.id.B)).getText().toString();
+
+        Log.i(TAG,"onSaveInstanceState:");
+        outState.putString("teama_score",scorea);
+        outState.putString("teameb_score",scoreb);
+}
+
+@Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        String scorea=savedInstanceState.getString("teama_score");
+        String scoreb=savedInstanceState.getString("teamb_score");
+    Log.i(TAG,"onRestoreInstanceState:");
+
+    ((TextView)findViewById(R.id.A)).setText(scorea);
+    ((TextView)findViewById(R.id.B)).setText(scoreb);
+}
+
+
 }

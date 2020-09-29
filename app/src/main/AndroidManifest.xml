@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".result" />
         <activity android:name=".exchange" />
-        <activity android:name=".calculation" />
+        <activity android:name=".calculation"  android:screenOrientation="landscape"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
