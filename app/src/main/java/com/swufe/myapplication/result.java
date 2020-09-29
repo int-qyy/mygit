@@ -15,6 +15,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -110,14 +115,44 @@ public class result extends AppCompatActivity implements Runnable {
         msg.obj="Hello from run()";
         handler.sendMessage(msg);
 **/
-
+        //读取URL
         URL url = null;
         try{
             url=new URL("https://www.usd-cny.com/bankofchina.htm");
+           /**
             HttpsURLConnection http=(HttpsURLConnection) url.openConnection();
             InputStream in= http.getInputStream() ;
             String html =inputStream2String(in);
             Log.i(TAG,"run:html="+html);
+            **/
+
+            //解析URL
+            Document document= Jsoup.connect(String.valueOf(url)).get();
+            Log.i(TAG,"run:"+document.title());
+            Elements tables= (Elements) document.getElementsByTag("table");
+            Element table6= (Element) tables.get(0);
+            Elements tds= (Elements) table6.getElementsByTag("td");
+            for(int i=0;i<tds.size();i+=6){
+                Element td1=tds.get(i);
+                Element td2=tds.get(i+5);
+                String str1=td1.text();
+                String val=td2.text();
+                Log.i(TAG,"run:"+str1+"==>"+val);
+                float v=100f/Float.parseFloat(val);
+                if(str1.equals("美元")){
+                    Dollar_rate=v;
+                    Log.i(TAG,"get: dollarRate=" + Dollar_rate);
+                }else if(str1.equals("欧元")){
+                    Euro_rate=v;
+                    Log.i(TAG,"get: euroRate=" + Euro_rate);
+                }else if(str1.equals("韩元")){
+                    Won_rate=v;
+                    Log.i(TAG,"get: wonRate=" + Won_rate);
+                }
+
+
+            }
+            Log.i(TAG,"get: dollarRate=" + Dollar_rate+"get: euroRate=" + Euro_rate+"get: wonRate=" + Won_rate);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -125,6 +160,8 @@ public class result extends AppCompatActivity implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
 
 
     }
