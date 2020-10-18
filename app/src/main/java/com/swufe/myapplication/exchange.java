@@ -120,6 +120,17 @@ public class exchange extends AppCompatActivity {
 
         startActivityForResult(intent, 1);
     }
+
+    public void turn(View view){
+        Intent intent=new Intent(exchange.this,list.class);
+        startActivity(intent);
+    }
+    public void grid(View view){
+        Intent intent=new Intent(exchange.this,GridViewList.class);
+        startActivity(intent);
+
+    }
+
     private String inputStream2String(InputStream inputStream)
             throws IOException {
         final int bufferSize=1024;

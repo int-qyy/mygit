@@ -2,6 +2,7 @@ package com.swufe.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +28,8 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -36,7 +39,80 @@ public class result extends AppCompatActivity implements Runnable {
     float Dollar_rate,Euro_rate,Won_rate;
     private static final String TAG = "Result";
     Handler handler;
+    String lastDate;
+    String nowDate;
+    SharedPreferences sharedPreferences;
 
+
+
+    @Override
+    public void run(){
+        Log.i(TAG,"run:run().....");
+/**
+
+ **/
+        //读取URL
+        URL url = null;
+        try{
+            url=new URL("https://www.usd-cny.com/bankofchina.htm");
+            /**
+             HttpsURLConnection http=(HttpsURLConnection) url.openConnection();
+             InputStream in= http.getInputStream() ;
+             String html =inputStream2String(in);
+             Log.i(TAG,"run:html="+html);
+             **/
+            //解析URL
+            Document document= Jsoup.connect(String.valueOf(url)).get();
+            Log.i(TAG,"run:"+document.title());
+            Elements tables= (Elements) document.getElementsByTag("table");
+            Element table6= (Element) tables.get(0);
+            Elements tds= (Elements) table6.getElementsByTag("td");
+            Bundle bundle=new Bundle();
+            for(int i=0;i<tds.size();i+=6){
+                Element td1=tds.get(i);
+                Element td2=tds.get(i+5);
+                String str1=td1.text();
+                String val=td2.text();
+                //Log.i(TAG,"run:"+str1+"==>"+val);
+                float v=100f/Float.parseFloat(val);
+                if(str1.equals("美元")){
+                    Dollar_rate=v;
+                    Log.i(TAG,"get: dollarRate=" + Dollar_rate);
+                    bundle.putFloat("Dollar_rate", Dollar_rate);
+
+                }else if(str1.equals("欧元")){
+                    Euro_rate=v;
+                    Log.i(TAG,"get: euroRate=" + Euro_rate);
+                    bundle.putFloat("Euro_rate", Euro_rate);
+
+                }else if(str1.equals("韩元")){
+                    Won_rate=v;
+                    Log.i(TAG,"get: wonRate=" + Won_rate);
+                    bundle.putFloat("Won_rate", Won_rate);
+                }
+
+
+            }
+
+            Message msg = handler.obtainMessage(5);
+            msg.obj=bundle;
+            handler.sendMessage(msg);
+            Log.i(TAG,"get: dollarRate=" + Dollar_rate+"get: euroRate=" + Euro_rate+"get: wonRate=" + Won_rate);
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
+
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,32 +123,49 @@ public class result extends AppCompatActivity implements Runnable {
         Dollar_rate= bundle.getFloat("Dollar_Rate", 0.0f);
         Euro_rate= bundle.getFloat("Euro_Rate", 0.0f);
         Won_rate = bundle.getFloat("Won_Rate", 0.0f);
-        SharedPreferences sharedPreferences=getSharedPreferences("myrate", Activity.MODE_PRIVATE);
+        sharedPreferences=getSharedPreferences("myrate", Activity.MODE_PRIVATE);
         PreferenceManager.getDefaultSharedPreferences(this);
+        /**
         Dollar_rate=sharedPreferences.getFloat("Dollar_rate",0.0f);
         Euro_rate=sharedPreferences.getFloat("Euro_rate",0.0f);
         Won_rate=sharedPreferences.getFloat("Won_rate",0.0f);
+         **/
         dollar=(EditText) findViewById(R.id.dollar);
         euro=(EditText) findViewById(R.id.euro);
         won=(EditText) findViewById(R.id.won);
         dollar.setText(String.valueOf(Dollar_rate));
         euro.setText(String.valueOf(Euro_rate));
         won.setText(String.valueOf(Won_rate));
+        Date toDate=new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        nowDate = format.format(toDate);
+        lastDate = sharedPreferences.getString("last_date", "");
+        Log.i(TAG, "onCreate: 现在时间"+nowDate);
+        if (!lastDate.equals(nowDate)) {
+            Log.i(TAG, "onCreate: 需要更新，上次更新时间"+lastDate+"本次时间"+nowDate);
+            Thread t = new Thread(result.this);
+            t.start();
 
-        Thread thread=new Thread(this);
-        thread.start();
-
-        handler=new Handler(){
-            @Override
-            public void handleMessage(Message msg){
-                if(msg.what==5){
-                    String str =(String) msg.obj;
-                    Log.i(TAG,"handleMessage:getMessage msg= "+str);
-                    //show.setText(str);
+            handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    if (msg.what == 5) {
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        Bundle bundle = (Bundle) msg.obj;
+                        Dollar_rate = bundle.getFloat("dollar_rate");
+                        Euro_rate = bundle.getFloat("euro_rate");
+                        Won_rate = bundle.getFloat("won_rate");
+                        editor.putFloat("dollar_rate", Dollar_rate);
+                        editor.putFloat("euro_rate", Euro_rate);
+                        editor.putFloat("won_rate", Won_rate);
+                        editor.putString("last_date", nowDate);
+                        editor.apply();
+                    }
                 }
-                super.handleMessage(msg);
-            }
-        };
+            };
+
+        }
+
 
     }
 
@@ -107,64 +200,7 @@ public class result extends AppCompatActivity implements Runnable {
             finish();
 
     }
-    @Override
-    public void run(){
-        Log.i(TAG,"run:run().....");
-/**
-        Message msg = handler.obtainMessage(5);
-        msg.obj="Hello from run()";
-        handler.sendMessage(msg);
-**/
-        //读取URL
-        URL url = null;
-        try{
-            url=new URL("https://www.usd-cny.com/bankofchina.htm");
-           /**
-            HttpsURLConnection http=(HttpsURLConnection) url.openConnection();
-            InputStream in= http.getInputStream() ;
-            String html =inputStream2String(in);
-            Log.i(TAG,"run:html="+html);
-            **/
 
-            //解析URL
-            Document document= Jsoup.connect(String.valueOf(url)).get();
-            Log.i(TAG,"run:"+document.title());
-            Elements tables= (Elements) document.getElementsByTag("table");
-            Element table6= (Element) tables.get(0);
-            Elements tds= (Elements) table6.getElementsByTag("td");
-            for(int i=0;i<tds.size();i+=6){
-                Element td1=tds.get(i);
-                Element td2=tds.get(i+5);
-                String str1=td1.text();
-                String val=td2.text();
-                Log.i(TAG,"run:"+str1+"==>"+val);
-                float v=100f/Float.parseFloat(val);
-                if(str1.equals("美元")){
-                    Dollar_rate=v;
-                    Log.i(TAG,"get: dollarRate=" + Dollar_rate);
-                }else if(str1.equals("欧元")){
-                    Euro_rate=v;
-                    Log.i(TAG,"get: euroRate=" + Euro_rate);
-                }else if(str1.equals("韩元")){
-                    Won_rate=v;
-                    Log.i(TAG,"get: wonRate=" + Won_rate);
-                }
-
-
-            }
-            Log.i(TAG,"get: dollarRate=" + Dollar_rate+"get: euroRate=" + Euro_rate+"get: wonRate=" + Won_rate);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-    }
 
     private String inputStream2String(InputStream inputStream)
             throws IOException{

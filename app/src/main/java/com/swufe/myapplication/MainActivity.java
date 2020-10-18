@@ -7,12 +7,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +28,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView out1;
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     **/
     int i=0;
     int j=0;
-
+    /**
     @Override
 
 
@@ -87,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         out1.setText(""+i);
         out2.setText(""+j);
     }
-
+     **/
 
     float DollarRate=(float)0.147;
     float EuroRate=(float)0.122;
@@ -96,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
 
 
-/**
+
     @Override
 
 
@@ -162,6 +168,14 @@ public class MainActivity extends AppCompatActivity {
 
         startActivityForResult(intent, 1);
     }
+    public void turn(View view){
+        Intent intent=new Intent(MainActivity.this,list.class);
+        startActivity(intent);
+    }
+    public void grid(View view){
+        Intent intent=new Intent(MainActivity.this,GridViewList.class);
+        startActivity(intent);
+    }
 
 @Override
   protected void onActivityResult(int requestCode,int resultCode,Intent data){
@@ -190,5 +204,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    **/
+
+
+
+
 }

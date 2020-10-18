@@ -64,5 +64,24 @@
             android:onClick="onConfig"
             android:background="@color/colorButton"
             android:text="@string/config" />
+
+        <Button
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="turn"
+            android:background="@color/colorButton"
+            android:text="show" />
+
+        <Button
+            android:id="@+id/gridlist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="grid"
+            android:background="@color/colorButton"
+            android:text="gridlist" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
