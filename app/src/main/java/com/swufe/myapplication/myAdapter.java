@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class myAdapter extends ArrayAdapter {
     private static final String TAG = "MyAdapter";
     public myAdapter(Context context,
                      int resource,
-                     ArrayList<HashMap<String, String>> list){
+                     List<RateItem> list){
         super(context, resource,list);
     }
 

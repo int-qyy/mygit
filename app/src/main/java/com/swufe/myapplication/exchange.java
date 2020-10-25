@@ -115,9 +115,7 @@ public class exchange extends AppCompatActivity {
         bundle.putFloat("Dollar_Rate", dollarRate);
         bundle.putFloat("Euro_Rate", EuroRate);
         bundle.putFloat("Won_Rate", WonRate);
-
         intent.putExtras(bundle);
-
         startActivityForResult(intent, 1);
     }
 
@@ -126,9 +124,8 @@ public class exchange extends AppCompatActivity {
         startActivity(intent);
     }
     public void grid(View view){
-        Intent intent=new Intent(exchange.this,GridViewList.class);
+        Intent intent=new Intent(exchange.this, DeleteList.class);
         startActivity(intent);
-
     }
 
     private String inputStream2String(InputStream inputStream)

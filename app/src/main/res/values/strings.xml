@@ -17,4 +17,8 @@
     <string name="WON">WON</string>
     <string name="SAVE">SAVE</string>
     <string name="config">CONFIG</string>
+    <string name="hint">input RMB</string>
+    <string name="label_first">First Page</string>
+    <string name="label_second">Second Page</string>
+    <string name="label_third">Third Page</string>
 </resources>

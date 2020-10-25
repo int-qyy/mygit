@@ -83,5 +83,10 @@
             android:background="@color/colorButton"
             android:text="gridlist" />
 
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewpager"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
