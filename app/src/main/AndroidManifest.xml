@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Firstfragment"></activity>
+        <activity android:name=".vote"></activity>
+        <activity android:name=".Firstfragment" />
         <activity android:name=".viewPagerActivity" />
         <activity android:name=".HomeFragment" />
         <activity android:name=".Fragment" />
